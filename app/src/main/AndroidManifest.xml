@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".cusine.CuisineActivity"
+            android:label="@string/title_activity_cuisine" >
+        </activity>
     </application>
 
 </manifest>
