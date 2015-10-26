@@ -20,13 +20,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/new_plats"
-            android:id="@+id/newPlatButtonFrag" />
+            android:id="@+id/newPlatButtonFrag"
+            android:onClick="actionMenuCuisine" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/update_stock"
-            android:id="@+id/updateStockButtonFrag" />
+            android:id="@+id/updateStockButtonFrag"
+            android:onClick="actionMenuCuisine" />
     </LinearLayout>
 </RelativeLayout>

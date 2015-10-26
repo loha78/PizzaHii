@@ -1,5 +1,7 @@
 package projectapp.com.pizzahii.cusine;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,10 +11,17 @@ import projectapp.com.pizzahii.R;
 
 public class CuisineActivity extends AppCompatActivity {
 
+    static FragmentManager manager;
+    String fragToLoad;
+    NewPlatFrag newPlatFrag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuisine);
+        manager = getFragmentManager();
+        fragToLoad = getIntent().getExtras().getString("FragToLoad");
+        loadFrag(fragToLoad);
     }
 
     @Override
@@ -35,5 +44,15 @@ public class CuisineActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void loadFrag(String s) {
+        switch (s) {
+            case "new":
+                newPlatFrag = new NewPlatFrag();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.add(R.id.cuisineActivityFrame, newPlatFrag);
+                transaction.commit();
+        }
     }
 }
