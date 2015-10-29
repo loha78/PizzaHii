@@ -1,5 +1,6 @@
 package projectapp.com.pizzahii.cuisine;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -77,18 +78,22 @@ public class CuisineActivity extends AppCompatActivity {
 
     public void actionActivityCuisine(View v) {
 
+        Fragment fragment = (Fragment) getFragmentManager().findFragmentById(R.id.cuisineActivityFrame);
+
         switch (v.getId()) {
             case R.id.validateButton:
-                EditText name = (EditText) findViewById(R.id.newPlatName);
-                EditText quantite = (EditText) findViewById(R.id.newPlatQty);
+                EditText name = (EditText) findViewById(R.id.platName);
+                EditText quantite = (EditText) findViewById(R.id.platQte);
                 System.out.println("Click test");
                 writer = network.getWriter();
                 writer.println("AJOUT " + quantite.getText().toString() + " " + name.getText().toString());
+                CuisineActivity.this.finish();
                 break;
 
             case R.id.cancelButton:
                 CuisineActivity.this.finish();
                 break;
         }
+
     }
 }
