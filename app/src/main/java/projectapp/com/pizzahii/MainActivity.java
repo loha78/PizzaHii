@@ -1,6 +1,5 @@
 package projectapp.com.pizzahii;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -12,10 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import projectapp.com.pizzahii.Controller.NetworkConnection;
 import projectapp.com.pizzahii.commande.MenuCommandFrag;
-import projectapp.com.pizzahii.cusine.CuisineActivity;
-import projectapp.com.pizzahii.cusine.MenuCuisineFrag;
-import projectapp.com.pizzahii.cusine.NewPlatFrag;
+import projectapp.com.pizzahii.cuisine.CuisineActivity;
+import projectapp.com.pizzahii.cuisine.MenuCuisineFrag;
+import projectapp.com.pizzahii.cuisine.NewPlatFrag;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     AccueilFrag accueilFrag;
     NewPlatFrag newPlatFrag;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,14 +34,14 @@ public class MainActivity extends AppCompatActivity {
         buttonCommande = (Button) findViewById(R.id.buttonCommande);
         buttonCuisine = (Button) findViewById(R.id.buttonCuisine);
         manager = getFragmentManager();
-
-        accueilFrag = new AccueilFrag();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.managerFrameLayout, accueilFrag);
-        transaction.commit();
-
+        Fragment tempFrag = (Fragment) getFragmentManager().findFragmentById(R.id.managerFrameLayout);
+        if (tempFrag == null) {
+            accueilFrag = new AccueilFrag();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.add(R.id.managerFrameLayout, accueilFrag);
+            transaction.commit();
+        }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Gestion des fragments à ajouter et à enelever
+    // Gestion des fragments à ajouter et à enlever
     private void loadFragment(int layout, Fragment frag) {
         Fragment fragToDel = getFragmentManager().findFragmentById(R.id.managerFrameLayout);
         FragmentTransaction transaction1 = manager.beginTransaction();
@@ -99,11 +98,11 @@ public class MainActivity extends AppCompatActivity {
     public void actionMenuCuisine(View v) {
         switch (v.getId()) {
             case R.id.newPlatButtonFrag:
-                newPlatFrag = new NewPlatFrag();
+                //newPlatFrag = new NewPlatFrag();
                 followLink("new", CuisineActivity.class);
                 break;
             case R.id.updateStockButtonFrag:
-
+                followLink("update", CuisineActivity.class);
                 break;
         }
     }

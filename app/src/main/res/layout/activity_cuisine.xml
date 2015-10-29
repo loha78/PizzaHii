@@ -4,7 +4,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="projectapp.com.pizzahii.cusine.CuisineActivity">
+    tools:context="projectapp.com.pizzahii.cuisine.CuisineActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -36,13 +36,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:text="@string/cancel"
-                android:id="@+id/cancelButton" />
+                android:id="@+id/cancelButton"
+                android:onClick="actionActivityCuisine"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:text="@string/validate"
-                android:id="@+id/validateButton" />
+                android:id="@+id/validateButton"
+                android:onClick="actionActivityCuisine"/>
         </LinearLayout>
     </LinearLayout>
 

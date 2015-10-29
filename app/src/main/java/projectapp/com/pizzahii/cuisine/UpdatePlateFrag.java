@@ -1,7 +1,5 @@
-package projectapp.com.pizzahii.cusine;
+package projectapp.com.pizzahii.cuisine;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,12 +8,10 @@ import android.view.ViewGroup;
 
 import projectapp.com.pizzahii.R;
 
+public class UpdatePlateFrag extends Fragment {
 
-public class NewPlatFrag extends Fragment {
+    public UpdatePlateFrag() {
 
-
-    public NewPlatFrag() {
-        // Required empty public constructor
     }
 
     @Override
@@ -27,7 +23,6 @@ public class NewPlatFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new_plat, container, false);
+        return inflater.inflate(R.layout.fragment_update_plate, container, false);
     }
-
 }
