@@ -23,10 +23,6 @@
             android:name=".cuisine.CuisineActivity"
             android:label="@string/title_activity_cuisine" >
         </activity>
-        <activity
-            android:name=".commande.CommandeActivity"
-            android:label="@string/title_activity_commande" >
-        </activity>
     </application>
 
 </manifest>

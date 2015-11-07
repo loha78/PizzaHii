@@ -31,13 +31,4 @@
     <string name="welcome_title"> Bienvenue chez Pizza Hii!!</string>
     <string name="welcome_msg"> Selectionnez un role.</string>
 
-    <string name="hello_world">Hello world!</string>
-
-    //String cote commande
-    <string name="numeroCommande">N°_de_commande</string>
-    <string name="listePlatsDispo">Voici la liste des plats disponibles</string>
-
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 </resources>
