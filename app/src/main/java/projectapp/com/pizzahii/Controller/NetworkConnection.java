@@ -10,8 +10,8 @@ import java.net.Socket;
  */
 public class NetworkConnection extends AsyncTask<Void, Void, Boolean> {
 
-    private String ip = "172.18.1.153";
-    private int port = 7777;
+    private String ip = "10.0.2.2";
+    private int port = 7878;
     public Socket socket;
 
     public PrintWriter writer = new PrintWriter(System.out, true);

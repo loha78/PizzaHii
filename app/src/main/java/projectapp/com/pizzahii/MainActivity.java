@@ -11,8 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import projectapp.com.pizzahii.Controller.NetworkConnection;
-import projectapp.com.pizzahii.commande.MenuCommandFrag;
+import projectapp.com.pizzahii.commande.CommandeActivity;
+import projectapp.com.pizzahii.commande.MenuCommandeFrag;
 import projectapp.com.pizzahii.cuisine.CuisineActivity;
 import projectapp.com.pizzahii.cuisine.MenuCuisineFrag;
 import projectapp.com.pizzahii.cuisine.NewPlatFrag;
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonCommande;
     private Button buttonCuisine;
     static FragmentManager manager;
-    MenuCommandFrag fragCommande;
+    MenuCommandeFrag fragCommande;
     MenuCuisineFrag fragCuisine;
     AccueilFrag accueilFrag;
     NewPlatFrag newPlatFrag;
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (v.getId()) {
             case R.id.buttonCommande:
-                fragCommande = new MenuCommandFrag();
+                fragCommande = new MenuCommandeFrag();
                 loadFragment(R.id.managerFrameLayout, fragCommande);
                 buttonCommande.setBackgroundResource(R.drawable.selected_background);
                 buttonCuisine.setBackgroundResource(R.drawable.unselected_background);
@@ -97,13 +97,28 @@ public class MainActivity extends AppCompatActivity {
 
     public void actionMenuCuisine(View v) {
         switch (v.getId()) {
-            case R.id.newPlatButtonFrag:
+            case R.id.newOrderButtonFrag:
                 //newPlatFrag = new NewPlatFrag();
                 followLink("new", CuisineActivity.class);
                 break;
             case R.id.updateStockButtonFrag:
                 followLink("update", CuisineActivity.class);
                 break;
+        }
+    }
+
+    public void actionMenuCommande(View v) {
+        switch (v.getId()){
+            case R.id.newOrderButtonFrag:
+                followLink("new", CommandeActivity.class);
+                break;
+            case R.id.updateOrderButtonFrag:
+                followLink("update", CommandeActivity.class);
+                break;
+            case R.id.deleteOrderButtonFrag:
+                followLink("delete", CommandeActivity.class);
+                break;
+
         }
     }
 
