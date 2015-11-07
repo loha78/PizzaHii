@@ -13,6 +13,8 @@ import android.widget.EditText;
 import java.io.PrintWriter;
 
 import projectapp.com.pizzahii.Controller.NetworkConnection;
+import projectapp.com.pizzahii.Controller.ReadMessages;
+import projectapp.com.pizzahii.Controller.networkActivity;
 import projectapp.com.pizzahii.R;
 
 public class CuisineActivity extends AppCompatActivity {
