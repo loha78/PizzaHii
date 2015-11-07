@@ -23,7 +23,7 @@
                 android:id="@+id/buttonCommande"
                 android:layout_weight="1"
                 android:background="@drawable/unselected_background"
-                android:onClick="alternerFragmentCuisineCommande" />
+                android:onClick="alternerFragment" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
                 android:id="@+id/buttonCuisine"
                 android:layout_weight="1"
                 android:background="@drawable/unselected_background"
-                android:onClick="alternerFragmentCuisineCommande" />
+                android:onClick="alternerFragment" />
         </LinearLayout>
 
         <FrameLayout
