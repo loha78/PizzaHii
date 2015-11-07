@@ -11,7 +11,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.nio.Buffer;
+import java.util.ArrayList;
+
 import projectapp.com.pizzahii.Controller.NetworkConnection;
+import projectapp.com.pizzahii.commande.CommandeActivity;
 import projectapp.com.pizzahii.commande.MenuCommandFrag;
 import projectapp.com.pizzahii.cuisine.CuisineActivity;
 import projectapp.com.pizzahii.cuisine.MenuCuisineFrag;
@@ -25,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     MenuCommandFrag fragCommande;
     MenuCuisineFrag fragCuisine;
     AccueilFrag accueilFrag;
-    NewPlatFrag newPlatFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,10 +102,26 @@ public class MainActivity extends AppCompatActivity {
         transaction2.commit();
     }
 
+    // Gestion des bouton de l activité commande
+    public void actionMenuCommande(View v) {
+        switch (v.getId()){
+            case R.id.newOrderButtonFrag:
+                followLink("new", CommandeActivity.class);
+                break;
+            case R.id.updateOrderButtonFrag:
+                followLink("update", CommandeActivity.class);
+                break;
+            case R.id.deleteOrderButtonFrag:
+                followLink("delete", CommandeActivity.class);
+                break;
+
+        }
+    }
+
+    // Gestion de l'action des boutons de l activité cuisine
     public void actionMenuCuisine(View v) {
         switch (v.getId()) {
             case R.id.newPlatButtonFrag:
-                //newPlatFrag = new NewPlatFrag();
                 followLink("new", CuisineActivity.class);
                 break;
             case R.id.updateStockButtonFrag:

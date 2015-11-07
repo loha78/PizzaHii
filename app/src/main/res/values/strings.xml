@@ -9,7 +9,7 @@
     <string name="name">Nom:</string>
     <string name="quantity">Quantité:</string>
     <string name="price">Prix (€):</string>
-    <string name="title_activity_commande">Nouvelle Commande</string>
+    <string name="title_activity_commande">Gestion Commande</string>
     <string name="title_activity_cuisine">La cuisine</string>
     <string name="title_activity_menu_button_fragment">menuButtonFragment</string>
     <string name="title_activity_menu_cuisine_fragment">menuCuisineFragment</string>
@@ -30,5 +30,10 @@
     // String Accueil
     <string name="welcome_title"> Bienvenue chez Pizza Hii!!</string>
     <string name="welcome_msg"> Selectionnez un role.</string>
+
+    // String cote commande
+    <string name="listePlatsDispo"> Voici la liste des plats disponibles </string>
+    <string name="numeroCommande"> Numero de commande </string>
+
 
 </resources>
