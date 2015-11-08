@@ -10,31 +10,36 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Spinner;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import projectapp.com.pizzahii.R;
 
+
+/*
+    Activité principale de la gestion des plats en cuisine
+ */
 public class CuisineActivity extends AppCompatActivity {
 
     private PrintWriter writer = new PrintWriter(System.out, true);
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     static FragmentManager manager;
+
+    // Determine lors de la creation de la vue quel fragment charger
     String fragToLoad;
 
     NewPlatFrag newPlatFrag;
     UpdatePlateFrag updatePlateFrag;
-
-    String list = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuisine);
         manager = getFragmentManager();
+
+        // Recuperer dans l'intention le mot clé qui determine le fragment souhaité
         fragToLoad = getIntent().getExtras().getString("FragToLoad");
         loadFrag(fragToLoad);
     }
@@ -85,6 +90,7 @@ public class CuisineActivity extends AppCompatActivity {
 
         switch (v.getId()) {
             case R.id.validateButton:
+                // Action du bouton valider pour une mise a jour du nombre de plat
                 if (fragment instanceof UpdatePlateFrag) {
                     String plat = updatePlateFrag.getSelectedValue();
                     writer = updatePlateFrag.getWriter();
@@ -94,6 +100,7 @@ public class CuisineActivity extends AppCompatActivity {
                     }
                 }
 
+                // Action si on cree un nouveau plat
                 if (fragment instanceof NewPlatFrag) {
                     writer = newPlatFrag.getWriter();
                     EditText name = (EditText) findViewById(R.id.platName);

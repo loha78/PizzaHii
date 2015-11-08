@@ -2,10 +2,11 @@ package projectapp.com.pizzahii.commande;
 
 import java.util.List;
 
-/**
- * Created by NAJI on 08/11/2015.
- */
 public class Commande {
+
+    /* Gestion des commandes effectuees depuis l'UI
+       Chaque commande est identifiee par un numero de commande et la liste des plats choisis
+     */
 
     public int numero;
     public List<String> listePlatsCommandes;

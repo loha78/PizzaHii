@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         buttonCommande = (Button) findViewById(R.id.buttonCommande);
         buttonCuisine = (Button) findViewById(R.id.buttonCuisine);
         manager = getFragmentManager();
+
+        // Verifier si un fragment est deja chargé dans la vue sinon ajouter le fragment d accueil
         Fragment tempFrag = (Fragment) getFragmentManager().findFragmentById(R.id.managerFrameLayout);
         if (tempFrag == null) {
             accueilFrag = new AccueilFrag();
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // Choisir d afficher le fragment de gestion des commandes ou celui pour la gestion des plats
     public void alternerFragment(View v) {
 
         switch (v.getId()) {

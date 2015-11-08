@@ -1,12 +1,8 @@
 package projectapp.com.pizzahii.commande;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,9 +21,6 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 
 import projectapp.com.pizzahii.MainActivity;
 import projectapp.com.pizzahii.R;
@@ -52,7 +45,6 @@ public class CommandeActivity extends AppCompatActivity implements AdapterView.O
 
     EditText numeroCommandeEditText;
 
-
     private PrintWriter writer = new PrintWriter(System.out, true);
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -66,7 +58,6 @@ public class CommandeActivity extends AppCompatActivity implements AdapterView.O
 
     String plat;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,21 +65,30 @@ public class CommandeActivity extends AppCompatActivity implements AdapterView.O
 
         listViewPlatsDisponibles = (ListView) findViewById(R.id.listePlatsDispoView);
         listViewPlatsCommandes = (ListView) findViewById(R.id.listePlatsCommandesView);
+        listViewPlatsDisponibles.setOnItemClickListener(this);
 
         validerCommandeButton = (Button)findViewById(R.id.validateButton);
         annulerCommandeButton = (Button)findViewById(R.id.cancelButton);
         retourMenuButton = (Button)findViewById(R.id.returnButton);
 
+        // Demarrer la connexion au serveur
         startNetwork = new StartNetwork();
         startNetwork.execute();
 
-        afficherListePlatDisponibles();
-
-        listViewPlatsDisponibles.setOnItemClickListener((AdapterView.OnItemClickListener) this);
+        // Gerer la persistence des donnees de commande
+        if(savedInstanceState != null){
+            listePlatsCommandes = savedInstanceState.getStringArrayList(LISTE_PLATS_COMMANDES);
+            listePlatsDisponibles = savedInstanceState.getStringArrayList(LISTE_PLATS_DISPONIBLES);
+            afficherListePlatCommandes();
+            afficherListePlatDisponibles();
+        }
+        else {
+            listePlatsDisponibles = new ArrayList<String>();
+            afficherListePlatDisponibles();
+        }
 
         numeroCommandeEditText = (EditText)findViewById(R.id.newOrderNumber);
         numeroCommandeEditText.setText("" + listeCommande.size() + 1);
-
     }
 
     @Override
@@ -96,20 +96,23 @@ public class CommandeActivity extends AppCompatActivity implements AdapterView.O
         System.out.println("Dans onSaveInstanceState");
 
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putStringArrayList(LISTE_PLATS_DISPONIBLES, (ArrayList<String>)listePlatsDisponibles);
-
-        if(listePlatsCommandes.size()!=0){
-            savedInstanceState.putStringArrayList(LISTE_PLATS_COMMANDES, (ArrayList<String>) listePlatsCommandes);
-        }
+        savedInstanceState.putStringArrayList(LISTE_PLATS_DISPONIBLES, (ArrayList<String>) listePlatsDisponibles);
+        savedInstanceState.putStringArrayList(LISTE_PLATS_COMMANDES, (ArrayList<String>) listePlatsCommandes);
     }
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        startNetwork = new StartNetwork();
+        startNetwork.execute();
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_commande, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -131,6 +134,7 @@ public class CommandeActivity extends AppCompatActivity implements AdapterView.O
         }
     }
 
+    // Ajoute l'element clické a la liste des plats en cours de commande
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         plat = listePlatsDisponibles.get(position).substring(0, (listePlatsDisponibles.get(position).length() - 3));
@@ -153,6 +157,7 @@ public class CommandeActivity extends AppCompatActivity implements AdapterView.O
         super.finish();
     }
 
+    // Methodes associées aux reponses des bouttons de l UI
     public void performButtonAction(View v){
         switch(v.getId()){
             case R.id.returnButton:
@@ -174,6 +179,11 @@ public class CommandeActivity extends AppCompatActivity implements AdapterView.O
 
     private void afficherListePlatDisponibles(){
         writer.println("QUANTITE");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, listePlatsDisponibles);
         listViewPlatsDisponibles.setAdapter(adapter);
     }
@@ -217,6 +227,9 @@ public class CommandeActivity extends AppCompatActivity implements AdapterView.O
     }
 
 
+    // ------------------------------------------
+    //              Connexion                 ---
+    // ------------------------------------------
     private class StartNetwork extends AsyncTask<Void, Void, Boolean> {
         @Override
         protected void onPreExecute() {
@@ -248,8 +261,7 @@ public class CommandeActivity extends AppCompatActivity implements AdapterView.O
         }
     }
 
-
-
+    // Activer une tache de fond qui va lire les données en provenance du serveur
     private class ReadMessages extends AsyncTask<Void, String, Void> {
         @Override
         protected Void doInBackground(Void... v) {
@@ -276,5 +288,4 @@ public class CommandeActivity extends AppCompatActivity implements AdapterView.O
 
         }
     }
-
 }

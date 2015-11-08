@@ -52,11 +52,11 @@ public class UpdatePlateFrag extends Fragment {
 
         spinner = (Spinner) v.findViewById(R.id.platNameSpinner);
 
-
         // Inflate the layout for this fragment
         return v;
     }
 
+    // Envoyer à l'activité l'element selectionné dans la liste deroulante
     public String getSelectedValue() {
         if (spinner != null && spinner.getSelectedItem() != null) {
             return (String)spinner.getSelectedItem();
@@ -143,8 +143,7 @@ public class UpdatePlateFrag extends Fragment {
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    String item = adapterView.getItemAtPosition(i).toString();
-                    // Toast.makeText(parent.getContext(), spinner.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), spinner.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
                 }
 
                 @Override

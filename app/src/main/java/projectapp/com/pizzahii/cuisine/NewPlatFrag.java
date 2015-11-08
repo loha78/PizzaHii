@@ -45,7 +45,6 @@ public class NewPlatFrag extends Fragment {
         return inflater.inflate(R.layout.fragment_new_plat, container, false);
     }
 
-
     //-------------------------------------------------------
     //               Connexion                     ----------
     //-------------------------------------------------------
