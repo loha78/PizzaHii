@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +29,6 @@ public class CuisineActivity extends AppCompatActivity {
     UpdatePlateFrag updatePlateFrag;
 
     String list = "";
-    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,11 +86,11 @@ public class CuisineActivity extends AppCompatActivity {
         switch (v.getId()) {
             case R.id.validateButton:
                 if (fragment instanceof UpdatePlateFrag) {
-                    spinner = (Spinner) v.findViewById(R.id.platNameSpinner);
-                    String plat = spinner.getSelectedItem().toString();
-                    if (plat != null){
+                    String plat = updatePlateFrag.getSelectedValue();
+                    writer = updatePlateFrag.getWriter();
+                    if (!TextUtils.isEmpty(plat)){
                         EditText quantite = (EditText) findViewById(R.id.platQte);
-                        writer.println("AJOUT " + quantite.getText().toString() + spinner.getSelectedItem().toString());
+                        writer.println("AJOUT " + quantite.getText().toString() + " "  + plat);
                     }
                 }
 
