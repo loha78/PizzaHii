@@ -35,5 +35,8 @@
     <string name="listePlatsDispo"> Voici la liste des plats disponibles </string>
     <string name="numeroCommande"> Numero de commande </string>
 
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>
