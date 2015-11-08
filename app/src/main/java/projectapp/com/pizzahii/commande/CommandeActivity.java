@@ -107,7 +107,7 @@ public class CommandeActivity extends AppCompatActivity implements AdapterView.O
         startNetwork.execute();
 
     }
-
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_commande, menu);
@@ -225,8 +225,7 @@ public class CommandeActivity extends AppCompatActivity implements AdapterView.O
         afficherListePlatCommandes();
         afficherListePlatDisponibles();
     }
-
-
+    
     // ------------------------------------------
     //              Connexion                 ---
     // ------------------------------------------
