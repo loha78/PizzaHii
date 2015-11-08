@@ -8,9 +8,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-/**
- * Created by m406368 on 28/10/2015.
- */
 public class NetworkConnection extends AsyncTask<Void, Void, Boolean> {
 
     private String ip = "10.0.2.2";
@@ -43,9 +40,8 @@ public class NetworkConnection extends AsyncTask<Void, Void, Boolean> {
         }
     }
 
-    public PrintWriter getWriter() {
-        return this.writer;
-    }
+    public PrintWriter getWriter() { return this.writer; }
 
     public BufferedReader getReader() { return this.reader; }
+
 }

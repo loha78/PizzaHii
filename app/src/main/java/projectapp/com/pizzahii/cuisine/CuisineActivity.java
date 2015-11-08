@@ -9,29 +9,31 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
-
-import projectapp.com.pizzahii.Controller.NetworkConnection;
 import projectapp.com.pizzahii.R;
 
 public class CuisineActivity extends AppCompatActivity {
 
     private PrintWriter writer = new PrintWriter(System.out, true);
-    NetworkConnection network;
+    private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     static FragmentManager manager;
     String fragToLoad;
+
     NewPlatFrag newPlatFrag;
     UpdatePlateFrag updatePlateFrag;
+
+    String list = "";
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuisine);
-        network = new NetworkConnection();
-        network.execute();
-        writer = network.getWriter();
         manager = getFragmentManager();
         fragToLoad = getIntent().getExtras().getString("FragToLoad");
         loadFrag(fragToLoad);
@@ -76,17 +78,29 @@ public class CuisineActivity extends AppCompatActivity {
         }
     }
 
+    // Methode associée aux boutons annuler ou valider
     public void actionActivityCuisine(View v) {
 
         Fragment fragment = (Fragment) getFragmentManager().findFragmentById(R.id.cuisineActivityFrame);
 
         switch (v.getId()) {
             case R.id.validateButton:
-                EditText name = (EditText) findViewById(R.id.platName);
-                EditText quantite = (EditText) findViewById(R.id.platQte);
-                System.out.println("Click test");
-                writer = network.getWriter();
-                writer.println("AJOUT " + quantite.getText().toString() + " " + name.getText().toString());
+                if (fragment instanceof UpdatePlateFrag) {
+                    spinner = (Spinner) v.findViewById(R.id.platNameSpinner);
+                    String plat = spinner.getSelectedItem().toString();
+                    if (plat != null){
+                        EditText quantite = (EditText) findViewById(R.id.platQte);
+                        writer.println("AJOUT " + quantite.getText().toString() + spinner.getSelectedItem().toString());
+                    }
+                }
+
+                if (fragment instanceof NewPlatFrag) {
+                    writer = newPlatFrag.getWriter();
+                    EditText name = (EditText) findViewById(R.id.platName);
+                    EditText quantite = (EditText) findViewById(R.id.platQte);
+                    writer.println("AJOUT " + quantite.getText().toString() + " " + name.getText().toString());
+                }
+
                 CuisineActivity.this.finish();
                 break;
 
