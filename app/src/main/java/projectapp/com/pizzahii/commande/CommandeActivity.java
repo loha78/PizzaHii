@@ -74,6 +74,7 @@ public class CommandeActivity extends AppCompatActivity implements AdapterView.O
 
         listViewPlatsDisponibles = (ListView) findViewById(R.id.listePlatsDispoView);
         listViewPlatsCommandes = (ListView) findViewById(R.id.listePlatsCommandesView);
+        listViewPlatsDisponibles.setOnItemClickListener((AdapterView.OnItemClickListener) this);
 
         validerCommandeButton = (Button)findViewById(R.id.validateButton);
         annulerCommandeButton = (Button)findViewById(R.id.cancelButton);
@@ -82,13 +83,19 @@ public class CommandeActivity extends AppCompatActivity implements AdapterView.O
         startNetwork = new StartNetwork();
         startNetwork.execute();
 
-        afficherListePlatDisponibles();
-
-        listViewPlatsDisponibles.setOnItemClickListener((AdapterView.OnItemClickListener) this);
+        if(savedInstanceState != null){
+            listePlatsCommandes = savedInstanceState.getStringArrayList(LISTE_PLATS_COMMANDES);
+            listePlatsDisponibles = savedInstanceState.getStringArrayList(LISTE_PLATS_DISPONIBLES);
+            afficherListePlatCommandes();
+            afficherListePlatDisponibles();
+        }
+        else {
+            listePlatsDisponibles = new ArrayList<String>();
+            afficherListePlatDisponibles();
+        }
 
         numeroCommandeEditText = (EditText)findViewById(R.id.newOrderNumber);
         numeroCommandeEditText.setText("" + listeCommande.size() + 1);
-
     }
 
     @Override
@@ -96,12 +103,19 @@ public class CommandeActivity extends AppCompatActivity implements AdapterView.O
         System.out.println("Dans onSaveInstanceState");
 
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putStringArrayList(LISTE_PLATS_DISPONIBLES, (ArrayList<String>)listePlatsDisponibles);
-
-        if(listePlatsCommandes.size()!=0){
-            savedInstanceState.putStringArrayList(LISTE_PLATS_COMMANDES, (ArrayList<String>) listePlatsCommandes);
-        }
+        savedInstanceState.putStringArrayList(LISTE_PLATS_DISPONIBLES, (ArrayList<String>) listePlatsDisponibles);
+        savedInstanceState.putStringArrayList(LISTE_PLATS_COMMANDES, (ArrayList<String>) listePlatsCommandes);
     }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        startNetwork = new StartNetwork();
+        startNetwork.execute();
+
+    }
+
+
 
 
     @Override
@@ -174,6 +188,11 @@ public class CommandeActivity extends AppCompatActivity implements AdapterView.O
 
     private void afficherListePlatDisponibles(){
         writer.println("QUANTITE");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, listePlatsDisponibles);
         listViewPlatsDisponibles.setAdapter(adapter);
     }

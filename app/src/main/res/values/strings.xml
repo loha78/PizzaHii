@@ -17,11 +17,6 @@
     <string name="title_activity_test_fragment">testFragment</string>
     <string name="add">Ajouter:</string>
 
-    // String cote serveur
-    <string name="nouvelleCommande">Saisir une nouvelle commande</string>
-    <string name="modifierCommande">Modifier une commande</string>
-    <string name="annulerCommande">Annuler une commande</string>
-
     // String cote cuisine
     <string name="new_plats">Nouveau plat</string>
     <string name="update_plats">Gestion des plats</string>
@@ -32,6 +27,8 @@
     <string name="welcome_msg"> Selectionnez un role.</string>
 
     // String cote commande
+    <string name="nouvelleCommande">Saisir une nouvelle commande</string>
+    <string name="gererCommande">Gestion des commandes</string>
     <string name="listePlatsDispo"> Voici la liste des plats disponibles </string>
     <string name="numeroCommande"> Numero de commande </string>
 
